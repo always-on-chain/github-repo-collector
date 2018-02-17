@@ -32,17 +32,17 @@ let save = (repos) => {
   })
 
    newRepo.save(function(err) {
-    //  if (err) return console.log('ERROR on Save', err)
+     if (err) return console.log('ERROR on Save', err)
    });
  }
 }
 
 let get = (callback) => {
-  Repo.find({language: 'Ruby'}, function(err, repos) {
+  Repo.find(function(err, repos) {
     if (err) return console.log('ERROR on Find', err);
     console.log('REPOS from GET', repos);
     callback(repos);
-  });
+  }).limit(6).sort({id: -1});
 }
 
 module.exports.save = save;

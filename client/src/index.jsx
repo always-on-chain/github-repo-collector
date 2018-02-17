@@ -12,7 +12,14 @@ class App extends React.Component {
     }
   }
 
-  search (term) {
+  changeState (data) {
+    this.setState({
+      repos: data
+    });
+  }
+
+  search (term, callback) {
+    console.log('callback', callback)
     console.log(`${term} was searched`);
     // TODO
     $.ajax({
@@ -34,6 +41,10 @@ class App extends React.Component {
       contentType: 'text/plain',
       success: function(data) {
         console.log('GET SUCCESS! ', data)
+        callback(data);
+        // for (var i = 0; i < data.length; i++) {
+        //   document.getElementById('table').appendChild(<tr>data[i]</tr>);
+        // }
       },
       error: function(error) {
         console.log('GET ERROR ', error);
@@ -46,7 +57,7 @@ class App extends React.Component {
     return (<div>
       <h1>Github Fetcher</h1>
       <RepoList repos={this.state.repos}/>
-      <Search onSearch={this.search.bind(this)}/>
+      <Search onSearch={this.search.bind(this)} changeState={this.changeState.bind(this)} />
     </div>)
   }
 }
