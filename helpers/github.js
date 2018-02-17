@@ -20,9 +20,9 @@ let getReposByUsername = (user) => {
   request(options, function(error, response, body) {
     console.log('error', error);
     console.log('statusCode:', response && response.statusCode);
-    console.log('body:', body);
+    // console.log('body:', body);
     database.save(JSON.parse(body));
-    // database.get(JSON.parse(body));
+    // database.get();
   })
 
 }

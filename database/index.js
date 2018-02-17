@@ -19,7 +19,6 @@ let save = (repos) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
-  console.log('AMOUNT OF REPOS', repos.length);
 
   for (var i = 0; i < repos.length; i++) {
     newRepo = new Repo({
@@ -33,23 +32,18 @@ let save = (repos) => {
   })
 
    newRepo.save(function(err) {
-     if (err) return console.log('ERROR on Save', err)
+    //  if (err) return console.log('ERROR on Save', err)
    });
-
-   Repo.find(function(err, repos) {
-    if (err) return console.log('ERROR on Find', err);
-    console.log('REPOS from FIND', repos, 'REPOS LENGTH', repos.length);
-    // return repos;
-  })
  }
 }
 
-// let get = (repos) => {
-//   Repo.find(function(err, repos) {
-//     if (err) return console.log('ERROR on Find', err);
-//     console.log('REPOS from FIND', repos);
-//     // return repos;
-//   })
-// }
+let get = (callback) => {
+  Repo.find({language: 'Ruby'}, function(err, repos) {
+    if (err) return console.log('ERROR on Find', err);
+    console.log('REPOS from GET', repos);
+    callback(repos);
+  });
+}
 
 module.exports.save = save;
+module.exports.get = get;
