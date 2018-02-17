@@ -21,10 +21,22 @@ class App extends React.Component {
       data: term,
       contentType: 'text/plain',
       success: function(data) {
-        console.log('SUCCESS! ', data)
+        console.log('POST SUCCESS! ', data)
       },
       error: function(error) {
-        console.log('ERROR ', error);
+        console.log('POST ERROR ', error);
+      }
+    })
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost:1128/repos',
+      data: term,
+      contentType: 'text/plain',
+      success: function(data) {
+        console.log('GET SUCCESS! ', data)
+      },
+      error: function(error) {
+        console.log('GET ERROR ', error);
       }
     })
     
